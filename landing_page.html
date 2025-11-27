@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartTAXer AI多元稅務助手 - 自動對帳、催繳、催件系統</title>
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --primary-color: #0f172a;
+            /* Deep Blue */
+            --secondary-color: #1e293b;
+            /* Slate */
+            --accent-color: #d4af37;
+            /* Gold */
+            --text-light: #f8fafc;
+            --text-dark: #334155;
+            --bg-light: #ffffff;
+            --bg-off-white: #f1f5f9;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.3;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--accent-color);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: var(--transition);
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: #cbd5e1;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Core Value Banner */
+        .core-value-banner {
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .core-value-banner span {
+            margin: 0 20px;
+            display: inline-block;
+        }
+
+        /* Pain Points Section (The Rant) */
+        .pain-section {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pain-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .pain-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .pain-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .pain-card p {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 0;
+        }
+
+        .quote-box {
+            background-color: var(--bg-off-white);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+            position: relative;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 100px;
+            color: rgba(212, 175, 55, 0.2);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-family: serif;
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: var(--bg-off-white);
+        }
+
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .feature-row.reverse {
+            direction: rtl;
+        }
+
+        .feature-row.reverse .feature-content {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-content .badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-list li i {
+            color: var(--accent-color);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .feature-image img {
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Security Section */
+        .security-section {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .security-item i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .security-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .security-item p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        /* Authority/Why Us Section */
+        .authority-section {
+            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .feature-row,
+            .feature-row.reverse {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .stats-grid,
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .core-value-banner span {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-tags">
+                <span class="tag">AI 賦能</span>
+                <span class="tag">自動化營運</span>
+                <span class="tag">ISO 資安精神</span>
+            </div>
+            <h1>SmartTAXer AI 多元稅務助手<br><span class="text-accent">會計事務所的智能營運系統</span></h1>
+            <p>別再當「保母」和「討債公司」。<br>讓 AI 幫您 <strong>自動催件、自動對帳、自動催繳</strong>。</p>
+            <a href="#cta" class="btn">預約系統演示 (Demo)</a>
+        </div>
+    </section>
+
+    <!-- Core Value Banner -->
+    <div class="core-value-banner">
+        <div class="container">
+            <span><i class="fa-solid fa-check-circle"></i> 自動催件</span>
+            <span><i class="fa-solid fa-check-circle"></i> 自動對帳</span>
+            <span><i class="fa-solid fa-check-circle"></i> 自動催繳</span>
+        </div>
+    </div>
+
+    <!-- Pain Points Section (The Rant) -->
+    <section class="section-padding pain-section">
+        <div class="container">
+            <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+                <h2 class="text-dark">為什麼事務所<span class="text-accent">越做越累</span>？</h2>
+                <p>因為您把 80% 的時間，都花在這些「低價值」的重複勞動上。</p>
+            </div>
+
+            <div class="quote-box">
+                <h3>「說話，我是神仙還是所長？」</h3>
+                <p style="margin-top: 20px; font-size: 1.1rem;">
+                    憑證10號才來，缺半張、漏四張，分類還亂七八糟。<br>
+                    我還要一筆一筆打報表、寫補充說明、對帳對銀行流水？<br>
+                    一個月公費收你4000元，還要我三催四請才肯付錢？<br>
+                    回答我，我是不是全靠人體燃燒在做事？
+                </p>
+            </div>
+
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <h3><i class="fa-solid fa-bullhorn"></i> 催件地獄</h3>
+                    <p>員工每天花 3-4 小時打電話、傳 LINE 催憑證。客戶一句「忘了」或「月底再給」，您只能加班趕件。</p>
+                </div>
+                <div class="pain-card">
+                    <h3><i class="fa-solid fa-file-invoice-dollar"></i> 對帳惡夢</h3>
+                    <p>銀行流水幾百筆，人工一筆筆勾稽，眼花撩亂還容易錯。一錯又要重頭查，時間就是這樣浪費的。</p>
+                </div>
+                <div class="pain-card">
+                    <h3><i class="fa-solid fa-hand-holding-dollar"></i> 收款尷尬</h3>
+                    <p>公費已經夠低了，還要像討債一樣追著客戶跑？不好意思開口，現金流就卡住。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-padding features-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <h2>SmartTAXer 三大核心解放，把時間還給專業</h2>
+                <p>我們不只做帳，我們幫您解決「人」的問題。</p>
+            </div>
+
+            <!-- Feature 1: Auto-Chasing (A2) -->
+            <div class="feature-row">
+                <div class="feature-content">
+                    <span class="badge">A2 模組</span>
+                    <h3>智能催件與物流協作</h3>
+                    <p>不用再當保母，AI 幫您準時收齊憑證。</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> <strong>自動追殺：</strong> LINE/SMS 自動排程提醒，客戶不交件，系統幫您催。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>物流串接：</strong> 客戶點選「預約收件」，系統自動派單物流去收，無縫接軌。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>OCR 分件：</strong> 憑證一進來，OCR 自動掃描分類，直接進入建檔流程。</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Automated Chasing">
+                </div>
+            </div>
+
+            <!-- Feature 2: Auto-Reconciliation (A3) -->
+            <div class="feature-row reverse">
+                <div class="feature-content">
+                    <span class="badge">A3 模組</span>
+                    <h3>AI 自動對帳與報表</h3>
+                    <p>告別人工勾稽，讓 AI 處理繁瑣流水。</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> <strong>流水勾稽：</strong> 匯入銀行存摺，AI 自動比對帳務紀錄，秒速完成對帳。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>異常標記：</strong> 自動偵測金額不符或不明交易，紅字標示，專人只需處理異常。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>一鍵報表：</strong> 401 表、銀行調節表、科目餘額表，一鍵生成，精準無誤。</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="AI Reconciliation">
+                </div>
+            </div>
+
+            <!-- Feature 3: Auto-Collection (New/Integrated) -->
+            <div class="feature-row">
+                <div class="feature-content">
+                    <span class="badge">A2+ 模組</span>
+                    <h3>智能催繳與金流管理</h3>
+                    <p>收錢不尷尬，現金流自動入袋。</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> <strong>自動請款：</strong> 系統自動發送當期請款單，時間到就寄出。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>未付提醒：</strong> 期限到未入帳，AI 溫柔提醒客戶，避免人工催討的尷尬。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>金流儀表板：</strong> 應收帳款、未收帳款一目了然，老闆隨時掌握現金流。</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Auto Collection">
+                </div>
+            </div>
+
+            <!-- Feature 4: RAG & Chatbot (A1/A4) -->
+            <div class="feature-row reverse">
+                <div class="feature-content">
+                    <span class="badge">A1 & A4 模組</span>
+                    <h3>稅務 RAG 與智能客服</h3>
+                    <p>專業問題秒回，銷售機會不漏接。</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> <strong>法規秒查：</strong> 50 萬字稅務知識庫，客戶問什麼都能答。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>銷售引導：</strong> 內建銷售腳本，把「問問」變成「簽約」。</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>24/7 待命：</strong> 半夜也能回覆基礎問題，提升客戶滿意度。</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="AI Chatbot">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="section-padding security-section">
+        <div class="container">
+            <h2>銀行級資安防護，讓您安心執業</h2>
+            <p>我們深知會計事務所對資料安全的嚴格要求。</p>
+            <div class="security-grid">
+                <div class="security-item">
+                    <i class="fa-brands fa-google"></i>
+                    <h4>Google Cloud 架構</h4>
+                    <p>採用 Google Cloud IAM 權限控管與 AES-256 加密儲存，資料安全有保障。</p>
+                </div>
+                <div class="security-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h4>ISO 標準精神</h4>
+                    <p>依循 ISO 27001 資安管理精神，落實最小權限原則與資料遮罩機制。</p>
+                </div>
+                <div class="security-item">
+                    <i class="fa-solid fa-user-secret"></i>
+                    <h4>隱私保護設計</h4>
+                    <p>AI 查詢紀錄自動去識別化，並設有定期刪除機制，保障客戶隱私。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authority / Why Us -->
+    <section class="section-padding authority-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2>已有數百家事務所選擇 SmartTAXer</h2>
+                <p>加入數位轉型行列，搶佔 AI 紅利。</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>90%</h3>
+                    <p>催件成功率大幅提升</p>
+                </div>
+                <div class="stat-item">
+                    <h3>65%</h3>
+                    <p>申報時間平均減少</p>
+                </div>
+                <div class="stat-item">
+                    <h3>0%</h3>
+                    <p>人工對帳錯誤率</p>
+                </div>
+            </div>
+
+            <div class="value-prop-box"
+                style="background: var(--secondary-color); color: #fff; padding: 40px; border-radius: 15px; text-align: center;">
+                <h3>「這世界上有兩種費用不能省：律師費與會計費。」</h3>
+                <p style="font-size: 1.1rem; margin-top: 20px;">
+                    好的系統也是一樣。SmartTAXer 每天成本不到一杯咖啡，卻能為您省下聘請一位行政助理的費用。<br>
+                    讓您的團隊專注於高價值的稅務規劃，而不是低價值的資料整理。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="section-padding cta-section">
+        <div class="container cta-content">
+            <h2>準備好升級您的事務所了嗎？</h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem;">
+                立即預約 SmartTAXer 系統演示，體驗 AI 帶來的效率革命。<br>
+                限時提供「90 天 AI 體驗計畫」，無風險試用。
+            </p>
+            <a href="#" class="btn">預約系統演示 (Demo)</a>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">或加入官方 LINE 諮詢</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Space Co. (SmartTAXer). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
