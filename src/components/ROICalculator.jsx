@@ -115,7 +115,10 @@ const ROICalculator = () => {
                         <LineChart data={chartData}>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} />
                             <XAxis dataKey="clients" label={{ value: '人均客戶數', position: 'insideBottom', offset: -5 }} />
-                            <YAxis tickFormatter={(value) => `${value / 10000}萬`} />
+                            <YAxis
+                                tickFormatter={(value) => `${value / 10000}萬`}
+                                label={{ value: '每月淨利潤 (NT$)', angle: -90, position: 'insideLeft', offset: 10 }}
+                            />
                             <Tooltip formatter={(value) => `NT$ ${value.toLocaleString()}`} />
                             <Legend verticalAlign="top" height={36} />
                             <Line type="monotone" dataKey="traditional" name="傳統模式 (需增加人力)" stroke="#94a3b8" strokeDasharray="5 5" dot={false} />
