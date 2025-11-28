@@ -4,21 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartTAXer AI多元稅務助手 - 自動對帳、催繳、催件系統</title>
+    <title>SmartTAXer AI多元稅務助手 - 會計事務所的智能營運革命</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset & Base Styles */
+        /* 
+         * Premium Design System 
+         * Theme: Deep Navy & Gold (Glassmorphism)
+         */
         :root {
-            --primary-color: #0f172a;
-            /* Deep Blue */
-            --secondary-color: #1e293b;
-            /* Slate */
-            --accent-color: #d4af37;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --bg-card-hover: rgba(51, 65, 85, 0.8);
+            --primary: #3b82f6;
+            /* Tech Blue */
+            --accent: #d4af37;
             /* Gold */
-            --text-light: #f8fafc;
-            --text-dark: #334155;
-            --bg-light: #ffffff;
-            --bg-off-white: #f1f5f9;
-            --transition: all 0.3s ease;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
         }
 
         * {
@@ -28,366 +39,291 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
             overflow-x: hidden;
         }
 
         h1,
         h2,
         h3,
-        h4,
-        h5,
-        h6 {
-            line-height: 1.3;
+        h4 {
             font-weight: 700;
+            line-height: 1.2;
             margin-bottom: 1rem;
         }
 
         p {
             margin-bottom: 1.5rem;
+            color: var(--text-muted);
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Utility Classes */
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
         .section-padding {
-            padding: 80px 0;
-        }
-
-        .text-center {
-            text-align: center;
+            padding: 100px 0;
         }
 
         .text-accent {
-            color: var(--accent-color);
+            color: var(--accent);
+        }
+
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-success {
+            color: var(--success);
+        }
+
+        .text-danger {
+            color: var(--danger);
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--accent-color);
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, #b8860b 100%);
             color: #fff;
-            font-weight: 700;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            transition: var(--transition);
-            border: 2px solid var(--accent-color);
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            border: none;
             cursor: pointer;
+            font-size: 1.1rem;
         }
 
         .btn:hover {
-            background-color: transparent;
-            color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background-color: #fff;
-            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text-light);
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.05), transparent 40%);
             position: relative;
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
-            padding-top: 60px;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 1.5rem;
-            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            color: #cbd5e1;
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
         }
 
-        .hero-tags {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
+        /* Comparison Section (Timeline) */
+        .comparison-section {
+            background: #0b1120;
         }
 
-        .tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .timeline-container {
+            position: relative;
+            margin-top: 60px;
         }
 
-        /* Core Value Banner */
-        .core-value-banner {
-            background-color: var(--accent-color);
-            color: #fff;
-            padding: 20px 0;
+        .timeline-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            margin-bottom: 40px;
         }
 
-        .core-value-banner span {
-            margin: 0 20px;
-            display: inline-block;
+        .timeline-header h3 {
+            font-size: 1.8rem;
+            padding-bottom: 15px;
+            border-bottom: 2px solid;
         }
 
-        /* Pain Points Section (The Rant) */
-        .pain-section {
-            background-color: var(--bg-light);
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
             position: relative;
         }
 
-        .pain-grid {
+        .timeline-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: var(--glass-border);
+            transition: 0.3s;
+        }
+
+        .timeline-card.old {
+            border-left: 4px solid var(--danger);
+        }
+
+        .timeline-card.new {
+            border-left: 4px solid var(--success);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .timeline-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vs-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-dark);
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        /* Deep Dive (12 Scenarios) */
+        .deep-dive-section {
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .matrix-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 20px;
             margin-top: 50px;
         }
 
-        .pain-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid var(--primary-color);
-            transition: var(--transition);
+        .matrix-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
         }
 
-        .pain-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .pain-card h3 {
-            color: var(--primary-color);
+        .matrix-card h4 {
+            color: var(--primary);
             margin-bottom: 15px;
-            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
         }
 
-        .pain-card p {
-            font-size: 0.95rem;
-            color: #64748b;
-            margin-bottom: 0;
+        .scenario-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin: 0 5px 5px 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-        .quote-box {
-            background-color: var(--bg-off-white);
-            padding: 40px;
+        /* ROI Section */
+        .roi-section {
+            background: #0f172a;
+        }
+
+        .roi-dashboard {
+            background: var(--bg-card);
             border-radius: 20px;
-            margin: 60px 0;
-            position: relative;
-            text-align: center;
-            font-style: italic;
-        }
-
-        .quote-box::before {
-            content: '"';
-            font-size: 100px;
-            color: rgba(212, 175, 55, 0.2);
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-family: serif;
-        }
-
-        /* Features Section */
-        .features-section {
-            background-color: var(--bg-off-white);
-        }
-
-        .feature-row {
+            padding: 40px;
+            border: var(--glass-border);
+            box-shadow: var(--shadow-glow);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
-            margin-bottom: 80px;
         }
 
-        .feature-row.reverse {
-            direction: rtl;
+        .roi-stats {
+            display: grid;
+            gap: 20px;
         }
 
-        .feature-row.reverse .feature-content {
-            direction: ltr;
-        }
-
-        .feature-content h3 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .feature-content .badge {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .feature-list li {
-            margin-bottom: 10px;
+        .stat-row {
             display: flex;
-            align-items: flex-start;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .feature-list li i {
-            color: var(--accent-color);
-            margin-right: 10px;
-            margin-top: 5px;
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
-        .feature-image img {
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .stat-value.highlight {
+            color: var(--success);
+            font-size: 2rem;
         }
 
-        /* Security Section */
-        .security-section {
-            background-color: var(--primary-color);
-            color: #fff;
-            text-align: center;
-        }
-
-        .security-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .security-item i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .security-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .security-item p {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-
-        /* Authority/Why Us Section */
-        .authority-section {
-            background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 60px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .stat-item p {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+        .roi-chart-container {
             position: relative;
-            text-align: center;
-            color: #fff;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--text-muted);
         }
 
-        .cta-section::before {
-            content: '';
+        .bar {
+            width: 80px;
+            background: var(--text-muted);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: height 1s ease;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .bar.new {
+            background: linear-gradient(to top, var(--success), #34d399);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .bar-label {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            bottom: -30px;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: #94a3b8;
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            color: #fff;
+            font-weight: 700;
         }
 
         /* Responsive */
@@ -396,25 +332,29 @@
                 font-size: 2.5rem;
             }
 
-            .feature-row,
-            .feature-row.reverse {
-                grid-template-columns: 1fr;
-                direction: ltr;
-            }
-
-            .stats-grid,
-            .security-grid {
+            .timeline-header,
+            .timeline-row {
                 grid-template-columns: 1fr;
             }
 
-            .core-value-banner span {
-                display: block;
-                margin: 5px 0;
+            .timeline-card.old {
+                border-left: 4px solid var(--danger);
+                margin-bottom: 20px;
+            }
+
+            .timeline-card.new {
+                border-left: 4px solid var(--success);
+            }
+
+            .vs-badge {
+                display: none;
+            }
+
+            .roi-dashboard {
+                grid-template-columns: 1fr;
             }
         }
     </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -422,233 +362,194 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <div class="hero-tags">
-                <span class="tag">AI 賦能</span>
-                <span class="tag">自動化營運</span>
-                <span class="tag">ISO 資安精神</span>
+            <div style="margin-bottom: 20px;">
+                <span
+                    style="background: rgba(212, 175, 55, 0.1); color: var(--accent); padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.3); font-size: 0.9rem; font-weight: 600;">
+                    <i class="fa-solid fa-robot"></i> 專為會計事務所打造的智能中樞
+                </span>
             </div>
-            <h1>SmartTAXer AI 多元稅務助手<br><span class="text-accent">會計事務所的智能營運系統</span></h1>
-            <p>別再當「保母」和「討債公司」。<br>讓 AI 幫您 <strong>自動催件、自動對帳、自動催繳</strong>。</p>
-            <a href="#cta" class="btn">預約系統演示 (Demo)</a>
-        </div>
-    </section>
-
-    <!-- Core Value Banner -->
-    <div class="core-value-banner">
-        <div class="container">
-            <span><i class="fa-solid fa-check-circle"></i> 自動催件</span>
-            <span><i class="fa-solid fa-check-circle"></i> 自動對帳</span>
-            <span><i class="fa-solid fa-check-circle"></i> 自動催繳</span>
-        </div>
-    </div>
-
-    <!-- Pain Points Section (The Rant) -->
-    <section class="section-padding pain-section">
-        <div class="container">
-            <div class="text-center" style="max-width: 800px; margin: 0 auto;">
-                <h2 class="text-dark">為什麼事務所<span class="text-accent">越做越累</span>？</h2>
-                <p>因為您把 80% 的時間，都花在這些「低價值」的重複勞動上。</p>
-            </div>
-
-            <div class="quote-box">
-                <h3>「說話，我是神仙還是所長？」</h3>
-                <p style="margin-top: 20px; font-size: 1.1rem;">
-                    憑證10號才來，缺半張、漏四張，分類還亂七八糟。<br>
-                    我還要一筆一筆打報表、寫補充說明、對帳對銀行流水？<br>
-                    一個月公費收你4000元，還要我三催四請才肯付錢？<br>
-                    回答我，我是不是全靠人體燃燒在做事？
-                </p>
-            </div>
-
-            <div class="pain-grid">
-                <div class="pain-card">
-                    <h3><i class="fa-solid fa-bullhorn"></i> 催件地獄</h3>
-                    <p>員工每天花 3-4 小時打電話、傳 LINE 催憑證。客戶一句「忘了」或「月底再給」，您只能加班趕件。</p>
-                </div>
-                <div class="pain-card">
-                    <h3><i class="fa-solid fa-file-invoice-dollar"></i> 對帳惡夢</h3>
-                    <p>銀行流水幾百筆，人工一筆筆勾稽，眼花撩亂還容易錯。一錯又要重頭查，時間就是這樣浪費的。</p>
-                </div>
-                <div class="pain-card">
-                    <h3><i class="fa-solid fa-hand-holding-dollar"></i> 收款尷尬</h3>
-                    <p>公費已經夠低了，還要像討債一樣追著客戶跑？不好意思開口，現金流就卡住。</p>
-                </div>
+            <h1>您的同仁是<span class="text-accent">專業顧問</span>，<br>不該是<span class="text-primary">行政保母</span>。</h1>
+            <p>會計師與記帳士是高價值的專業人士。<br>別讓他們的時間浪費在「催件、輸入、對帳」等低產值庶務上。<br>SmartTAXer 幫您釋放團隊潛能，專注於更有價值的稅務規劃。</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="#roi" class="btn">查看 ROI 效益分析</a>
+                <a href="#comparison" class="btn"
+                    style="background: transparent; border: 1px solid rgba(255,255,255,0.2);">了解新舊流程差異</a>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="section-padding features-section">
+    <!-- Comparison Section -->
+    <section id="comparison" class="section-padding comparison-section">
         <div class="container">
-            <div class="text-center" style="margin-bottom: 60px;">
-                <h2>SmartTAXer 三大核心解放，把時間還給專業</h2>
-                <p>我們不只做帳，我們幫您解決「人」的問題。</p>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 class="text-main">流程大對決：低階庶務 vs 高階專業</h2>
+                <p>為什麼有些事務所可以一人顧 100 家，而您一人顧 50 家就快崩潰？</p>
             </div>
 
-            <!-- Feature 1: Auto-Chasing (A2) -->
-            <div class="feature-row">
-                <div class="feature-content">
-                    <span class="badge">A2 模組</span>
-                    <h3>智能催件與物流協作</h3>
-                    <p>不用再當保母，AI 幫您準時收齊憑證。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>自動追殺：</strong> LINE/SMS 自動排程提醒，客戶不交件，系統幫您催。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>物流串接：</strong> 客戶點選「預約收件」，系統自動派單物流去收，無縫接軌。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>OCR 分件：</strong> 憑證一進來，OCR 自動掃描分類，直接進入建檔流程。</li>
-                    </ul>
+            <div class="timeline-container">
+                <div class="timeline-header">
+                    <h3 class="text-danger">傳統人工流程 (Old)</h3>
+                    <h3 class="text-success">SmartTAXer 智能流程 (New)</h3>
                 </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Automated Chasing">
-                </div>
-            </div>
 
-            <!-- Feature 2: Auto-Reconciliation (A3) -->
-            <div class="feature-row reverse">
-                <div class="feature-content">
-                    <span class="badge">A3 模組</span>
-                    <h3>AI 自動對帳與報表</h3>
-                    <p>告別人工勾稽，讓 AI 處理繁瑣流水。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>流水勾稽：</strong> 匯入銀行存摺，AI 自動比對帳務紀錄，秒速完成對帳。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>異常標記：</strong> 自動偵測金額不符或不明交易，紅字標示，專人只需處理異常。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>一鍵報表：</strong> 401 表、銀行調節表、科目餘額表，一鍵生成，精準無誤。</li>
-                    </ul>
+                <!-- Step 1: Collection -->
+                <div class="timeline-row">
+                    <div class="vs-badge">VS</div>
+                    <div class="timeline-card old">
+                        <h4><i class="fa-solid fa-phone-slash text-danger"></i> 催件地獄</h4>
+                        <p>月底人工打電話、傳 LINE 催客戶。客戶說「忘了」或「5號再給」。5號沒收到，繼續人工催。收到後發現缺件，再催。</p>
+                    </div>
+                    <div class="timeline-card new">
+                        <h4><i class="fa-solid fa-robot text-success"></i> 自動化協作</h4>
+                        <p>系統自動發送通知，客戶點選「預約取件」。時間到，<strong>物流自動派單</strong>去收。客戶沒動作？系統自動追殺，不用您開口。</p>
+                    </div>
                 </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="AI Reconciliation">
-                </div>
-            </div>
 
-            <!-- Feature 3: Auto-Collection (New/Integrated) -->
-            <div class="feature-row">
-                <div class="feature-content">
-                    <span class="badge">A2+ 模組</span>
-                    <h3>智能催繳與金流管理</h3>
-                    <p>收錢不尷尬，現金流自動入袋。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>自動請款：</strong> 系統自動發送當期請款單，時間到就寄出。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>未付提醒：</strong> 期限到未入帳，AI 溫柔提醒客戶，避免人工催討的尷尬。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>金流儀表板：</strong> 應收帳款、未收帳款一目了然，老闆隨時掌握現金流。</li>
-                    </ul>
+                <!-- Step 2: Processing -->
+                <div class="timeline-row">
+                    <div class="vs-badge">VS</div>
+                    <div class="timeline-card old">
+                        <h4><i class="fa-solid fa-file-excel text-danger"></i> 人工分類惡夢</h4>
+                        <p>收到憑證 -> 人工清洗 -> 剃除不合規 -> <strong>人工分類 (最花時間)</strong> -> 掃描 -> 人工切傳票 -> 財務帳確認。</p>
+                    </div>
+                    <div class="timeline-card new">
+                        <h4><i class="fa-solid fa-microchip text-success"></i> AI 智能辨識</h4>
+                        <p>全部丟進掃描機 -> <strong>AI 自動依 12 種邏輯分類</strong> -> 自動產生分錄與日記帳。員工只需花 <strong>3 分鐘</strong> 審核異常項目。
+                        </p>
+                    </div>
                 </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Auto Collection">
-                </div>
-            </div>
 
-            <!-- Feature 4: RAG & Chatbot (A1/A4) -->
-            <div class="feature-row reverse">
-                <div class="feature-content">
-                    <span class="badge">A1 & A4 模組</span>
-                    <h3>稅務 RAG 與智能客服</h3>
-                    <p>專業問題秒回，銷售機會不漏接。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>法規秒查：</strong> 50 萬字稅務知識庫，客戶問什麼都能答。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>銷售引導：</strong> 內建銷售腳本，把「問問」變成「簽約」。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>24/7 待命：</strong> 半夜也能回覆基礎問題，提升客戶滿意度。</li>
-                    </ul>
+                <!-- Step 3: Closing -->
+                <div class="timeline-row">
+                    <div class="vs-badge">VS</div>
+                    <div class="timeline-card old">
+                        <h4><i class="fa-solid fa-money-bill-wave text-danger"></i> 收款與對帳</h4>
+                        <p>人工催繳稅金 -> 人工催公費 (尷尬) -> 銀行存摺幾百筆同金額入帳 -> <strong>人工一筆筆勾稽 (眼花)</strong>。</p>
+                    </div>
+                    <div class="timeline-card new">
+                        <h4><i class="fa-solid fa-check-double text-success"></i> 金流全自動</h4>
+                        <p>自動發送稅單與公費通知 (含虛擬帳號) -> 客戶繳款 -> <strong>系統自動沖帳</strong>。逾期未繳？系統自動發送存證信函。</p>
+                    </div>
                 </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="AI Chatbot">
-                </div>
-            </div>
 
+            </div>
         </div>
     </section>
 
-    <!-- Security Section -->
-    <section class="section-padding security-section">
+    <!-- Deep Dive: 12 Scenarios -->
+    <section class="section-padding deep-dive-section">
         <div class="container">
-            <h2>銀行級資安防護，讓您安心執業</h2>
-            <p>我們深知會計事務所對資料安全的嚴格要求。</p>
-            <div class="security-grid">
-                <div class="security-item">
-                    <i class="fa-brands fa-google"></i>
-                    <h4>Google Cloud 架構</h4>
-                    <p>採用 Google Cloud IAM 權限控管與 AES-256 加密儲存，資料安全有保障。</p>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 class="text-primary">我們懂會計：12 種核心判定邏輯</h2>
+                <p>這不是普通的 OCR，這是內建會計大腦的 AI。</p>
+            </div>
+
+            <div class="matrix-grid">
+                <!-- Output -->
+                <div class="matrix-card">
+                    <h4><i class="fa-solid fa-arrow-up-from-bracket"></i> 銷項端 (Output)</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="scenario-tag">三聯-應稅/零稅 (公司戶)</span>
+                        <span class="scenario-tag">二聯-應稅 (個人戶)</span>
+                        <span class="scenario-tag">作廢 (號碼保留 金額0)</span>
+                        <span class="scenario-tag">折讓 (關聯原發票)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 15px;">系統自動判斷格式代號 (31, 35, 21...) 與稅別，自動處理作廢與折讓關聯。</p>
                 </div>
-                <div class="security-item">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h4>ISO 標準精神</h4>
-                    <p>依循 ISO 27001 資安管理精神，落實最小權限原則與資料遮罩機制。</p>
+
+                <!-- Input Tax -->
+                <div class="matrix-card">
+                    <h4><i class="fa-solid fa-arrow-down-to-bracket"></i> 進項端 - 稅務申報</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="scenario-tag">進項-可扣抵 (21, 25)</span>
+                        <span class="scenario-tag">進項-不可扣抵 (交際/自用車)</span>
+                        <span class="scenario-tag">進項-海關 (28)</span>
+                        <span class="scenario-tag">進項-折讓 (23, 29)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 15px;">AI 自動識別不可扣抵項目 (如交際費)，避免申報錯誤風險。</p>
                 </div>
-                <div class="security-item">
-                    <i class="fa-solid fa-user-secret"></i>
-                    <h4>隱私保護設計</h4>
-                    <p>AI 查詢紀錄自動去識別化，並設有定期刪除機制，保障客戶隱私。</p>
+
+                <!-- Input Finance & Exception -->
+                <div class="matrix-card">
+                    <h4><i class="fa-solid fa-book"></i> 純財務帳 & 例外處理</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="scenario-tag">國外 Invoice (只入帳)</span>
+                        <span class="scenario-tag">小規模收據</span>
+                        <span class="scenario-tag">勞務/薪資單</span>
+                        <span class="scenario-tag" style="border-color: var(--accent); color: var(--accent);">混合稅別
+                            (需拆分)</span>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 15px;">連最麻煩的「混合稅別」(如家樂福發票) 都能自動拆分應稅與免稅金額。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Authority / Why Us -->
-    <section class="section-padding authority-section">
+    <!-- ROI Section -->
+    <section id="roi" class="section-padding roi-section">
         <div class="container">
-            <div class="text-center" style="margin-bottom: 50px;">
-                <h2>已有數百家事務所選擇 SmartTAXer</h2>
-                <p>加入數位轉型行列，搶佔 AI 紅利。</p>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 class="text-success">算給老闆看：真實的 ROI 效益</h2>
+                <p>數據不會說謊。導入系統後，您的利潤結構將發生質變。</p>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>90%</h3>
-                    <p>催件成功率大幅提升</p>
+            <div class="roi-dashboard">
+                <div class="roi-stats">
+                    <div class="stat-row">
+                        <span>單人服務客戶數</span>
+                        <span class="stat-value">50 家 <i class="fa-solid fa-arrow-right"
+                                style="font-size: 1rem; margin: 0 10px;"></i> <span class="text-success">100
+                                家</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span>處理工時 (100家)</span>
+                        <span class="stat-value">2 週 <i class="fa-solid fa-arrow-right"
+                                style="font-size: 1rem; margin: 0 10px;"></i> <span class="text-success">3
+                                天</span></span>
+                    </div>
+                    <div class="stat-row">
+                        <span>每月營收 (以1800/家計)</span>
+                        <span class="stat-value">9 萬 <i class="fa-solid fa-arrow-right"
+                                style="font-size: 1rem; margin: 0 10px;"></i> <span class="text-success">18
+                                萬</span></span>
+                    </div>
+                    <div class="stat-row" style="border: none; padding-top: 30px;">
+                        <span style="font-size: 1.2rem;">每月淨利潤 (扣除薪資成本)</span>
+                        <span class="stat-value highlight">NT$ 108,000+</span>
+                    </div>
+                    <p style="font-size: 0.8rem; margin-top: 10px;">*假設每位員工薪資含勞健保 45,000 元，變動成本 20%。</p>
                 </div>
-                <div class="stat-item">
-                    <h3>65%</h3>
-                    <p>申報時間平均減少</p>
-                </div>
-                <div class="stat-item">
-                    <h3>0%</h3>
-                    <p>人工對帳錯誤率</p>
-                </div>
-            </div>
 
-            <div class="value-prop-box"
-                style="background: var(--secondary-color); color: #fff; padding: 40px; border-radius: 15px; text-align: center;">
-                <h3>「這世界上有兩種費用不能省：律師費與會計費。」</h3>
-                <p style="font-size: 1.1rem; margin-top: 20px;">
-                    好的系統也是一樣。SmartTAXer 每天成本不到一杯咖啡，卻能為您省下聘請一位行政助理的費用。<br>
-                    讓您的團隊專注於高價值的稅務規劃，而不是低價值的資料整理。
-                </p>
+                <div class="roi-chart-container">
+                    <div class="bar" style="height: 50%;">
+                        <span class="bar-value">50家</span>
+                        <span class="bar-label">傳統模式</span>
+                    </div>
+                    <div class="bar new" style="height: 100%;">
+                        <span class="bar-value">100家+</span>
+                        <span class="bar-label">SmartTAXer</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="cta" class="section-padding cta-section">
-        <div class="container cta-content">
-            <h2>準備好升級您的事務所了嗎？</h2>
-            <p style="margin-bottom: 30px; font-size: 1.2rem;">
-                立即預約 SmartTAXer 系統演示，體驗 AI 帶來的效率革命。<br>
-                限時提供「90 天 AI 體驗計畫」，無風險試用。
-            </p>
+    <!-- CTA -->
+    <section class="section-padding" style="text-align: center; background: linear-gradient(to top, #000, #0f172a);">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 30px;">別讓您的專業被雜事淹沒</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px;">現在導入，立即享受「3 天處理 100 家」的高效體驗。</p>
             <a href="#" class="btn">預約系統演示 (Demo)</a>
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">或加入官方 LINE 諮詢</p>
         </div>
     </section>
 
-    <footer>
+    <footer
+        style="padding: 40px 0; text-align: center; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.1);">
         <div class="container">
             <p>&copy; 2024 Your Space Co. (SmartTAXer). All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Smooth Scroll for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
