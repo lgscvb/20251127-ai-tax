@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const ROICalculator = () => {
     const [employees, setEmployees] = useState(3);
@@ -82,6 +82,10 @@ const ROICalculator = () => {
                         <div style={{ marginTop: '15px', fontSize: '0.9rem', color: '#94a3b8', textAlign: 'right' }}>
                             *設定參數：每戶公費 $1,800/月
                         </div>
+                        <div style={{ marginTop: '10px', padding: '10px', background: '#eff6ff', borderRadius: '8px', textAlign: 'center' }}>
+                            <span style={{ fontSize: '0.9rem', color: '#64748b' }}>總服務客戶數：</span>
+                            <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0f172a' }}>{employees * clientsPerEmployee} 家</span>
+                        </div>
                     </div>
 
                     {/* Big Numbers */}
@@ -112,7 +116,17 @@ const ROICalculator = () => {
                 {/* Chart */}
                 <div style={{ height: '350px' }}>
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chartData}>
+                        <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                            <defs>
+                                <linearGradient id="colorTraditional" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.2} />
+                                    <stop offset="95%" stopColor="#94a3b8" stopOpacity={0} />
+                                </linearGradient>
+                                <linearGradient id="colorSmart" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#d4af37" stopOpacity={0.3} />
+                                    <stop offset="95%" stopColor="#d4af37" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
                             <CartesianGrid strokeDasharray="3 3" vertical={false} />
                             <XAxis dataKey="clients" label={{ value: '人均客戶數', position: 'insideBottom', offset: -5 }} />
                             <YAxis
@@ -121,9 +135,9 @@ const ROICalculator = () => {
                             />
                             <Tooltip formatter={(value) => `NT$ ${value.toLocaleString()}`} />
                             <Legend verticalAlign="top" height={36} />
-                            <Line type="monotone" dataKey="traditional" name="傳統模式 (需增加人力)" stroke="#94a3b8" strokeDasharray="5 5" dot={false} />
-                            <Line type="monotone" dataKey="smart" name="SmartTAXer 智能模式" stroke="#d4af37" strokeWidth={3} activeDot={{ r: 8 }} />
-                        </LineChart>
+                            <Area type="monotone" dataKey="traditional" name="傳統模式 (需增加人力)" stroke="#94a3b8" fill="url(#colorTraditional)" strokeWidth={2} />
+                            <Area type="monotone" dataKey="smart" name="SmartTAXer 智能模式" stroke="#d4af37" fill="url(#colorSmart)" strokeWidth={3} />
+                        </AreaChart>
                     </ResponsiveContainer>
                     <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', marginTop: '10px' }}>
                         *傳統模式假設人均上限 50 家，超過需等比例增加人力成本
