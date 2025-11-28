@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area, ReferenceLine, BarChart, Bar, Cell, LabelList } from 'recharts';
 
 const ROICalculator = () => {
     const [employees, setEmployees] = useState(3);
@@ -10,19 +10,24 @@ const ROICalculator = () => {
 
     // Calculations
     const calculateData = (clientsPerEmp) => {
-        // Revenue is the same for both scenarios (assuming we achieve the target client volume)
-        const revenue = employees * clientsPerEmp * feePerClient;
+        const totalClients = employees * clientsPerEmp;
+        const revenue = totalClients * feePerClient;
 
         // Smart Mode Cost: Fixed employees (efficiency increased)
         const smartFixedCost = employees * salaryPerEmployee;
         const smartVariableCost = revenue * costRatio;
         const smartProfit = Math.round(revenue - smartFixedCost - smartVariableCost);
 
-        // Traditional Mode Cost: Need more employees to handle the load (Cap at 50 clients/emp)
-        // If target is 100 clients/emp, traditional needs 2x employees
+        // Traditional Mode Cost with Idle Cost Penalty
+        // If clients per employee < 30, add idle cost
+        let idleCostFactor = 1;
+        if (clientsPerEmp < 30) {
+            idleCostFactor = 1 + ((30 - clientsPerEmp) / 30) * 0.5; // Up to 50% cost increase
+        }
+
         const requiredEmployees = employees * (clientsPerEmp / 50);
-        const traditionalFixedCost = requiredEmployees * salaryPerEmployee;
-        const traditionalVariableCost = revenue * costRatio; // Assuming same variable cost ratio
+        const traditionalFixedCost = requiredEmployees * salaryPerEmployee * idleCostFactor;
+        const traditionalVariableCost = revenue * costRatio;
         const traditionalProfit = Math.round(revenue - traditionalFixedCost - traditionalVariableCost);
 
         return { smartProfit, traditionalProfit };
@@ -34,7 +39,7 @@ const ROICalculator = () => {
     // Chart Data Generation
     const chartData = useMemo(() => {
         const data = [];
-        for (let i = 30; i <= 150; i += 10) {
+        for (let i = 10; i <= 150; i += 5) {
             const { smartProfit, traditionalProfit } = calculateData(i);
             data.push({
                 clients: i,
@@ -44,6 +49,22 @@ const ROICalculator = () => {
         }
         return data;
     }, [employees]);
+
+    // Calculate gradient offset for profit/loss colors
+    const gradientOffset = () => {
+        const dataMax = Math.max(...chartData.map((i) => Math.max(i.smart, i.traditional)));
+        const dataMin = Math.min(...chartData.map((i) => Math.min(i.smart, i.traditional)));
+        if (dataMax <= 0) return 0;
+        if (dataMin >= 0) return 1;
+        return dataMax / (dataMax - dataMin);
+    };
+    const off = gradientOffset();
+
+    // Work hours comparison data
+    const workHoursData = [
+        { name: '傳統模式', hours: Math.round((employees * clientsPerEmployee) * 4) },
+        { name: '智能模式', hours: Math.round((employees * clientsPerEmployee) * 0.5) },
+    ];
 
     return (
         <div className="roi-calculator-container" style={{ background: '#fff', padding: '40px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
@@ -69,7 +90,7 @@ const ROICalculator = () => {
                             目標人均服務客戶數: <span style={{ color: '#d4af37', fontSize: '1.2rem' }}>{clientsPerEmployee} 家</span>
                         </label>
                         <input
-                            type="range" min="30" max="150" step="5" value={clientsPerEmployee}
+                            type="range" min="10" max="150" step="10" value={clientsPerEmployee}
                             onChange={(e) => setClientsPerEmployee(Number(e.target.value))}
                             style={{ width: '100%', accentColor: '#d4af37' }}
                         />
@@ -118,9 +139,9 @@ const ROICalculator = () => {
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                             <defs>
-                                <linearGradient id="colorTraditional" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.2} />
-                                    <stop offset="95%" stopColor="#94a3b8" stopOpacity={0} />
+                                <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset={off} stopColor="#10b981" stopOpacity={0.3} />
+                                    <stop offset={off} stopColor="#ef4444" stopOpacity={0.3} />
                                 </linearGradient>
                                 <linearGradient id="colorSmart" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#d4af37" stopOpacity={0.3} />
@@ -131,17 +152,43 @@ const ROICalculator = () => {
                             <XAxis dataKey="clients" label={{ value: '人均客戶數', position: 'insideBottom', offset: -5 }} />
                             <YAxis
                                 tickFormatter={(value) => `${value / 10000}萬`}
-                                label={{ value: '每月淨利潤 (NT$)', angle: -90, position: 'insideLeft', offset: 10 }}
+                                label={{ value: '每月淨利潤 (NT$)', position: 'top', offset: 20 }}
                             />
                             <Tooltip formatter={(value) => `NT$ ${value.toLocaleString()}`} />
                             <Legend verticalAlign="top" height={36} />
-                            <Area type="monotone" dataKey="traditional" name="傳統模式 (需增加人力)" stroke="#94a3b8" fill="url(#colorTraditional)" strokeWidth={2} />
+                            <ReferenceLine y={0} stroke="#000" strokeWidth={2} label={{ value: '零利潤', position: 'right' }} />
+                            <Area type="monotone" dataKey="traditional" name="傳統模式 (需增加人力)" stroke="#94a3b8" fill="url(#splitColor)" strokeWidth={2} />
                             <Area type="monotone" dataKey="smart" name="SmartTAXer 智能模式" stroke="#d4af37" fill="url(#colorSmart)" strokeWidth={3} />
                         </AreaChart>
                     </ResponsiveContainer>
                     <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', marginTop: '10px' }}>
                         *傳統模式假設人均上限 50 家，超過需等比例增加人力成本
                     </p>
+
+                    {/* Work Hours Comparison Chart */}
+                    <div style={{ marginTop: '40px' }}>
+                        <h3 style={{ textAlign: 'center', marginBottom: '20px', color: '#0f172a', fontSize: '1.1rem' }}>總工時對比 (小時/月)</h3>
+                        <div style={{ height: '200px' }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart
+                                    layout="vertical"
+                                    data={workHoursData}
+                                    margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
+                                >
+                                    <XAxis type="number" hide />
+                                    <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} width={80} tick={{ fontSize: '1rem', fontWeight: 'bold' }} />
+                                    <Tooltip />
+                                    <Bar dataKey="hours" radius={[0, 10, 10, 0]} barSize={50}>
+                                        {workHoursData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={index === 0 ? '#94a3b8' : '#10b981'} />
+                                        ))}
+                                        <LabelList dataKey="hours" position="right" style={{ fill: '#64748b', fontWeight: 'bold' }} formatter={(value) => `${value.toLocaleString()} hrs`} />
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#64748b', marginTop: '10px' }}>節省工時：<span style={{ color: '#10b981', fontWeight: 'bold' }}>{((1 - workHoursData[1].hours / workHoursData[0].hours) * 100).toFixed(0)}%</span></p>
+                    </div>
                 </div>
             </div>
         </div>
