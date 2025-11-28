@@ -9,25 +9,37 @@ const ROICalculator = () => {
     const costRatio = 0.2;
 
     // Calculations
-    const calculateProfit = (clientCount) => {
-        const revenue = employees * clientCount * feePerClient;
-        const fixedCost = employees * salaryPerEmployee;
-        const variableCost = revenue * costRatio;
-        return Math.round(revenue - fixedCost - variableCost);
+    const calculateData = (clientsPerEmp) => {
+        // Revenue is the same for both scenarios (assuming we achieve the target client volume)
+        const revenue = employees * clientsPerEmp * feePerClient;
+
+        // Smart Mode Cost: Fixed employees (efficiency increased)
+        const smartFixedCost = employees * salaryPerEmployee;
+        const smartVariableCost = revenue * costRatio;
+        const smartProfit = Math.round(revenue - smartFixedCost - smartVariableCost);
+
+        // Traditional Mode Cost: Need more employees to handle the load (Cap at 50 clients/emp)
+        // If target is 100 clients/emp, traditional needs 2x employees
+        const requiredEmployees = employees * (clientsPerEmp / 50);
+        const traditionalFixedCost = requiredEmployees * salaryPerEmployee;
+        const traditionalVariableCost = revenue * costRatio; // Assuming same variable cost ratio
+        const traditionalProfit = Math.round(revenue - traditionalFixedCost - traditionalVariableCost);
+
+        return { smartProfit, traditionalProfit };
     };
 
-    const currentProfit = calculateProfit(clientsPerEmployee);
-    const traditionalProfit = calculateProfit(50); // Traditional: 50 clients/employee
-    const profitIncrease = currentProfit - traditionalProfit;
+    const currentStats = calculateData(clientsPerEmployee);
+    const profitIncrease = currentStats.smartProfit - currentStats.traditionalProfit;
 
     // Chart Data Generation
     const chartData = useMemo(() => {
         const data = [];
         for (let i = 30; i <= 150; i += 10) {
+            const { smartProfit, traditionalProfit } = calculateData(i);
             data.push({
                 clients: i,
-                traditional: calculateProfit(50), // Constant baseline
-                smart: calculateProfit(i),
+                traditional: traditionalProfit,
+                smart: smartProfit,
             });
         }
         return data;
@@ -54,7 +66,7 @@ const ROICalculator = () => {
                     </div>
                     <div style={{ marginBottom: '40px' }}>
                         <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', color: '#334155' }}>
-                            人均服務客戶數: <span style={{ color: '#d4af37', fontSize: '1.2rem' }}>{clientsPerEmployee} 家</span>
+                            目標人均服務客戶數: <span style={{ color: '#d4af37', fontSize: '1.2rem' }}>{clientsPerEmployee} 家</span>
                         </label>
                         <input
                             type="range" min="30" max="150" step="5" value={clientsPerEmployee}
@@ -62,19 +74,22 @@ const ROICalculator = () => {
                             style={{ width: '100%', accentColor: '#d4af37' }}
                         />
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#94a3b8', marginTop: '5px' }}>
-                            <span>30家 (輕鬆)</span>
+                            <span>30家</span>
                             <span>50家 (傳統極限)</span>
-                            <span>100家 (智能標準)</span>
-                            <span>150家 (極限)</span>
+                            <span>100家</span>
+                            <span>150家</span>
+                        </div>
+                        <div style={{ marginTop: '15px', fontSize: '0.9rem', color: '#94a3b8', textAlign: 'right' }}>
+                            *設定參數：每戶公費 $1,800/月
                         </div>
                     </div>
 
                     {/* Big Numbers */}
                     <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '15px', border: '1px solid #e2e8f0' }}>
                         <div style={{ marginBottom: '15px' }}>
-                            <div style={{ fontSize: '0.9rem', color: '#64748b' }}>預估每月淨利潤</div>
+                            <div style={{ fontSize: '0.9rem', color: '#64748b' }}>預估每月淨利潤 (智能模式)</div>
                             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#10b981' }}>
-                                NT$ {currentProfit.toLocaleString()}
+                                NT$ {currentStats.smartProfit.toLocaleString()}
                             </div>
                         </div>
                         <div style={{ display: 'flex', gap: '20px' }}>
@@ -103,12 +118,12 @@ const ROICalculator = () => {
                             <YAxis tickFormatter={(value) => `${value / 10000}萬`} />
                             <Tooltip formatter={(value) => `NT$ ${value.toLocaleString()}`} />
                             <Legend verticalAlign="top" height={36} />
-                            <Line type="monotone" dataKey="traditional" name="傳統模式 (50家基準)" stroke="#94a3b8" strokeDasharray="5 5" dot={false} />
+                            <Line type="monotone" dataKey="traditional" name="傳統模式 (需增加人力)" stroke="#94a3b8" strokeDasharray="5 5" dot={false} />
                             <Line type="monotone" dataKey="smart" name="SmartTAXer 智能模式" stroke="#d4af37" strokeWidth={3} activeDot={{ r: 8 }} />
                         </LineChart>
                     </ResponsiveContainer>
                     <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', marginTop: '10px' }}>
-                        *X軸：人均服務客戶數成長 | Y軸：每月淨利潤
+                        *傳統模式假設人均上限 50 家，超過需等比例增加人力成本
                     </p>
                 </div>
             </div>
