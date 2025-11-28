@@ -182,9 +182,10 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* Comparison Section (Timeline) */
+        /* Comparison Section (Banner Style) */
         .comparison-section {
-            background-color: var(--bg-gray);
+            background: linear-gradient(to right, #2c3e50 50%, #f0fdf4 50%);
+            /* Split background */
         }
 
         .timeline-container {
@@ -198,44 +199,61 @@
             gap: 40px;
             text-align: center;
             margin-bottom: 40px;
+            color: #fff;
         }
 
-        .timeline-header h3 {
-            font-size: 1.8rem;
-            padding-bottom: 15px;
-            border-bottom: 3px solid;
+        .timeline-header h3:last-child {
+            color: #064e3b;
+            /* Dark green for the right side */
         }
 
         .timeline-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 30px;
+            gap: 60px;
+            /* Wider gap for VS badge */
+            margin-bottom: 40px;
+            position: relative;
+            align-items: center;
+        }
+
+        /* Old: Sticky Note Style */
+        .timeline-card.old {
+            background: #fef3c7;
+            /* Post-it Yellow */
+            color: #451a03;
+            padding: 25px;
+            border-radius: 2px;
+            /* Sharper corners */
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            border: none;
+            border-left: none;
+            transform: rotate(-2deg);
+            /* Slight tilt */
             position: relative;
         }
 
-        .timeline-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-card);
-            transition: 0.3s;
-            border: 1px solid var(--border-light);
+        .timeline-card.old::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            /* Tape area */
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        .timeline-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .timeline-card.old {
-            border-left: 5px solid var(--danger);
-        }
-
+        /* New: Clean Card Style */
         .timeline-card.new {
-            border-left: 5px solid var(--success);
-            background: #f0fdf4;
-            /* Very light green */
+            background: #fff;
+            color: #064e3b;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-left: none;
+            transform: rotate(1deg);
         }
 
         .timeline-card h4 {
@@ -251,14 +269,20 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            background: #fff;
-            border: 2px solid var(--border-light);
-            color: var(--text-muted);
-            padding: 8px 15px;
-            border-radius: 30px;
-            font-weight: bold;
+            background: #4ade80;
+            /* Bright Green */
+            border: 4px solid #fff;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
             z-index: 10;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Deep Dive (12 Scenarios) */
@@ -625,108 +649,202 @@
 
     <!-- ROI Section -->
     <section id="roi" class="section-padding roi-section">
-        <div class="container roi-container">
-            <div class="roi-content">
-                <h2 style="margin-bottom: 20px;">算給老闆看：真實的 ROI 效益</h2>
-                <p style="margin-bottom: 40px;">數據不會說謊。導入系統後，您的利潤結構與<strong>人員穩定度</strong>將發生質變。</p>
-
-                <div class="roi-dashboard">
-                    <div class="stat-row">
-                        <span>單人服務客戶數</span>
-                        <span class="stat-value">50 家 <i class="fa-solid fa-arrow-right"
-                                style="font-size: 1rem; margin: 0 10px;"></i> <span class="text-accent">100
-                                家</span></span>
-                    </div>
-                    <div class="stat-row">
-                        <span>忙季加班時數</span>
-                        <span class="stat-value">每天 4hr <i class="fa-solid fa-arrow-right"
-                                style="font-size: 1rem; margin: 0 10px;"></i> <span class="text-accent">0hr
-                                (準時下班)</span></span>
-                    </div>
-                    <div class="stat-row">
-                        <span>員工流動率</span>
-                        <span class="stat-value">高 (年年換人) <i class="fa-solid fa-arrow-right"
-                                style="font-size: 1rem; margin: 0 10px;"></i> <span class="text-accent">低
-                                (穩定留任)</span></span>
-                    </div>
-                    <div class="stat-row" style="border: none; padding-top: 30px;">
-                        <span style="font-size: 1.2rem;">每月淨利潤 (扣除薪資成本)</span>
-                        <span class="stat-value highlight">NT$ 108,000+</span>
-                    </div>
-                    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">*假設每位員工薪資含勞健保 45,000 元，變動成本 20%。</p>
-                </div>
-            </div>
-            <div class="roi-image">
-                <img src="https://images.unsplash.com/photo-1554224154-260327c00c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                    alt="Financial Growth">
-            </div>
+        <div class="container">
+            <div id="roi-root"></div>
         </div>
     </section>
+
+    <!-- React & Recharts Dependencies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
+
+    <script type="text/babel">
+        const { useState, useMemo } = React;
+        const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
+
+        const ROICalculator = () => {
+            const [employees, setEmployees] = useState(3);
+            const [clientsPerEmployee, setClientsPerEmployee] = useState(100);
+            const feePerClient = 1800;
+            const salaryPerEmployee = 45000;
+            const costRatio = 0.2;
+
+            // Calculations
+            const calculateProfit = (clientCount) => {
+                const revenue = employees * clientCount * feePerClient;
+                const fixedCost = employees * salaryPerEmployee;
+                const variableCost = revenue * costRatio;
+                return Math.round(revenue - fixedCost - variableCost);
+            };
+
+            const currentProfit = calculateProfit(clientsPerEmployee);
+            const traditionalProfit = calculateProfit(50); // Traditional: 50 clients/employee
+            const profitIncrease = currentProfit - traditionalProfit;
+
+            // Chart Data Generation
+            const chartData = useMemo(() => {
+                const data = [];
+                for (let i = 30; i <= 150; i += 10) {
+                    data.push({
+                        clients: i,
+                        traditional: calculateProfit(50), // Constant baseline
+                        smart: calculateProfit(i),
+                    });
+                }
+                return data;
+            }, [employees]);
+
+            return (
+                <div className="roi-calculator-container" style={{ background: '#fff', padding: '40px', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+                    <h2 style={{ textAlign: 'center', marginBottom: '10px', color: '#0f172a' }}>算給老闆看：真實的 ROI 效益</h2>
+                    <p style={{ textAlign: 'center', marginBottom: '40px', color: '#64748b' }}>拖動滑桿，預測您的利潤成長曲線</p>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
+                        {/* Controls & Stats */}
+                        <div>
+                            {/* Sliders */}
+                            <div style={{ marginBottom: '30px' }}>
+                                <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', color: '#334155' }}>
+                                    事務所員工數: <span style={{ color: '#d4af37', fontSize: '1.2rem' }}>{employees} 人</span>
+                                </label>
+                                <input
+                                    type="range" min="1" max="20" value={employees}
+                                    onChange={(e) => setEmployees(Number(e.target.value))}
+                                    style={{ width: '100%', accentColor: '#d4af37' }}
+                                />
+                            </div>
+                            <div style={{ marginBottom: '40px' }}>
+                                <label style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', color: '#334155' }}>
+                                    人均服務客戶數: <span style={{ color: '#d4af37', fontSize: '1.2rem' }}>{clientsPerEmployee} 家</span>
+                                </label>
+                                <input
+                                    type="range" min="30" max="150" step="5" value={clientsPerEmployee}
+                                    onChange={(e) => setClientsPerEmployee(Number(e.target.value))}
+                                    style={{ width: '100%', accentColor: '#d4af37' }}
+                                />
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#94a3b8', marginTop: '5px' }}>
+                                    <span>30家 (輕鬆)</span>
+                                    <span>50家 (傳統極限)</span>
+                                    <span>100家 (智能標準)</span>
+                                    <span>150家 (極限)</span>
+                                </div>
+                            </div>
+
+                            {/* Big Numbers */}
+                            <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '15px', border: '1px solid #e2e8f0' }}>
+                                <div style={{ marginBottom: '15px' }}>
+                                    <div style={{ fontSize: '0.9rem', color: '#64748b' }}>預估每月淨利潤</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#10b981' }}>
+                                        NT$ {currentProfit.toLocaleString()}
+                                    </div>
+                                </div>
+                                <div style={{ display: 'flex', gap: '20px' }}>
+                                    <div>
+                                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>比傳統模式多賺</div>
+                                        <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#0f172a' }}>
+                                            + {profitIncrease.toLocaleString()} /月
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>年營收增加</div>
+                                        <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#d4af37' }}>
+                                            + {(profitIncrease * 12).toLocaleString()} /年
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Chart */}
+                        <div style={{ height: '350px' }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={chartData}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="clients" label={{ value: '人均客戶數', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis tickFormatter={(value) => `${value / 10000}萬`} />
+                                    <Tooltip formatter={(value) => `NT$ ${value.toLocaleString()}`} />
+                                    <Legend verticalAlign="top" height={36} />
+                                    <Line type="monotone" dataKey="traditional" name="傳統模式 (50家基準)" stroke="#94a3b8" strokeDasharray="5 5" dot={false} />
+                                    <Line type="monotone" dataKey="smart" name="SmartTAXer 智能模式" stroke="#d4af37" strokeWidth={3} activeDot={{ r: 8 }} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                            <p style={{ textAlign: 'center', fontSize: '0.8rem', color: '#94a3b8', marginTop: '10px' }}>
+                                *X軸：人均服務客戶數成長 | Y軸：每月淨利潤
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('roi-root'));
+        root.render(<ROICalculator />);
+    </script>
 
     <!-- Features Section (Zig-Zag) -->
     <section class="section-padding features-section">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 80px;">
-                <h2 class="text-primary">三大核心解放，把時間還給專業</h2>
-                <p>我們不只做帳，我們幫您解決「人」的問題。</p>
-            </div>
+            <p>我們不只做帳，我們幫您解決「人」的問題。</p>
+        </div>
 
-            <!-- Feature 1 -->
-            <div class="feature-row">
-                <div class="feature-content">
-                    <span class="text-accent"
-                        style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Feature 01</span>
-                    <h3>智能催件與物流協作</h3>
-                    <p>不用再當保母，AI 幫您準時收齊憑證。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>自動追殺：</strong> LINE/SMS 自動排程提醒，客戶不交件，系統幫您催。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>物流串接：</strong> 客戶點選「預約收件」，系統自動派單物流去收。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>OCR 分件：</strong> 憑證一進來，OCR 自動掃描分類，直接進入建檔流程。</li>
-                    </ul>
-                </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Automated Chasing">
-                </div>
+        <!-- Feature 1 -->
+        <div class="feature-row">
+            <div class="feature-content">
+                <span class="text-accent"
+                    style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Feature 01</span>
+                <h3>智能催件與物流協作</h3>
+                <p>不用再當保母，AI 幫您準時收齊憑證。</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> <strong>自動追殺：</strong> LINE/SMS 自動排程提醒，客戶不交件，系統幫您催。</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>物流串接：</strong> 客戶點選「預約收件」，系統自動派單物流去收。</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>OCR 分件：</strong> 憑證一進來，OCR 自動掃描分類，直接進入建檔流程。</li>
+                </ul>
             </div>
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Automated Chasing">
+            </div>
+        </div>
 
-            <!-- Feature 2 -->
-            <div class="feature-row reverse">
-                <div class="feature-content">
-                    <span class="text-accent"
-                        style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Feature 02</span>
-                    <h3>AI 自動對帳與報表</h3>
-                    <p>告別人工勾稽，讓 AI 處理繁瑣流水。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>流水勾稽：</strong> 匯入銀行存摺，AI 自動比對帳務紀錄，秒速完成對帳。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>異常標記：</strong> 自動偵測金額不符或不明交易，紅字標示。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>一鍵報表：</strong> 401 表、銀行調節表、科目餘額表，一鍵生成。</li>
-                    </ul>
-                </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="AI Reconciliation">
-                </div>
+        <!-- Feature 2 -->
+        <div class="feature-row reverse">
+            <div class="feature-content">
+                <span class="text-accent"
+                    style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Feature 02</span>
+                <h3>AI 自動對帳與報表</h3>
+                <p>告別人工勾稽，讓 AI 處理繁瑣流水。</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> <strong>流水勾稽：</strong> 匯入銀行存摺，AI 自動比對帳務紀錄，秒速完成對帳。</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>異常標記：</strong> 自動偵測金額不符或不明交易，紅字標示。</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>一鍵報表：</strong> 401 表、銀行調節表、科目餘額表，一鍵生成。</li>
+                </ul>
             </div>
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="AI Reconciliation">
+            </div>
+        </div>
 
-            <!-- Feature 3 -->
-            <div class="feature-row">
-                <div class="feature-content">
-                    <span class="text-accent"
-                        style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Feature 03</span>
-                    <h3>智能催繳與金流管理</h3>
-                    <p>收錢不尷尬，現金流自動入袋。</p>
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>自動請款：</strong> 系統自動發送當期請款單，時間到就寄出。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>虛擬帳號：</strong> 整合金流，客戶匯款後系統自動沖帳。</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>存證信函：</strong> 逾期未繳，系統可自動生成存證信函範本。</li>
-                    </ul>
-                </div>
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Auto Collection">
-                </div>
+        <!-- Feature 3 -->
+        <div class="feature-row">
+            <div class="feature-content">
+                <span class="text-accent"
+                    style="font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Feature 03</span>
+                <h3>智能催繳與金流管理</h3>
+                <p>收錢不尷尬，現金流自動入袋。</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> <strong>自動請款：</strong> 系統自動發送當期請款單，時間到就寄出。</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>虛擬帳號：</strong> 整合金流，客戶匯款後系統自動沖帳。</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>存證信函：</strong> 逾期未繳，系統可自動生成存證信函範本。</li>
+                </ul>
             </div>
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Auto Collection">
+            </div>
+        </div>
         </div>
     </section>
 
