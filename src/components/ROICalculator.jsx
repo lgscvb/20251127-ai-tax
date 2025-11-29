@@ -21,13 +21,18 @@ const ROICalculator = () => {
     const smartProfit = revenue - smartFixedCost - smartVariableCost;
     const smartHours = totalClients * 0.5;
 
-    // Traditional Mode with idle cost penalty
+    // Traditional Mode
+    // If clients per employee is low, we still have to pay the fixed employees (cannot fire them immediately)
+    // If clients per employee is high (>50), we need to hire more people
+    const traditionalEmployees = Math.max(employees, totalClients / 50);
+
+    // Idle cost penalty logic
     let idleCostFactor = 1;
     if (clientsPerEmployee < 30) {
         idleCostFactor = 1 + ((30 - clientsPerEmployee) / 30) * 0.5;
     }
-    const requiredEmployees = employees * (clientsPerEmployee / 50);
-    const traditionalFixedCost = (requiredEmployees * salaryPerEmployee + fixedCost) * idleCostFactor;
+
+    const traditionalFixedCost = (traditionalEmployees * salaryPerEmployee + fixedCost) * idleCostFactor;
     const traditionalVariableCost = revenue * variableCostRatio;
     const traditionalProfit = revenue - traditionalFixedCost - traditionalVariableCost;
     const traditionalHours = totalClients * 3.2;
