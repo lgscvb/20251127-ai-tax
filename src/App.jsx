@@ -267,7 +267,7 @@ function App() {
               </ul>
             </div>
             <div className="feature-image">
-              <img src="https://images.unsplash.com/photo-1554224154-260327c00c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                 alt="Cash Flow Management" />
             </div>
           </div>
