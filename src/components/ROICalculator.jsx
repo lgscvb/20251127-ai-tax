@@ -34,8 +34,8 @@ const ROICalculator = () => {
 
     // Work hours comparison data
     const workHoursData = [
-        { name: '傳統模式', hours: Math.round(traditionalHours), fill: '#ef4444' },
-        { name: '智能模式', hours: Math.round(smartHours), fill: '#10b981' },
+        { name: '傳統模式', hours: Math.round(traditionalHours), fill: '#1e40af' },
+        { name: '智能模式', hours: Math.round(smartHours), fill: '#d4af37' },
     ];
 
     const profitDiff = smartProfit - traditionalProfit;
@@ -86,15 +86,15 @@ const ROICalculator = () => {
             {/* Comparison Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', marginBottom: '60px' }}>
                 {/* Traditional Mode Card */}
-                <div style={{ background: '#fef2f2', padding: '30px', borderRadius: '15px', border: '3px solid #ef4444' }}>
-                    <h3 style={{ color: '#ef4444', marginBottom: '25px', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: '#eff6ff', padding: '30px', borderRadius: '15px', border: '3px solid #1e40af' }}>
+                    <h3 style={{ color: '#1e40af', marginBottom: '25px', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <i className="fa-solid fa-user-clock"></i> 傳統模式
                     </h3>
                     <div style={{ marginBottom: '15px' }}>
                         <div style={{ color: '#64748b', fontSize: '0.9rem' }}>每月總收入</div>
                         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0f172a' }}>NT$ {revenue.toLocaleString()}</div>
                     </div>
-                    <div style={{ borderTop: '1px solid #fecaca', paddingTop: '15px', marginBottom: '15px' }}>
+                    <div style={{ borderTop: '1px solid #bfdbfe', paddingTop: '15px', marginBottom: '15px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                             <span style={{ color: '#64748b' }}>固定成本</span>
                             <span style={{ color: '#dc2626', fontWeight: 'bold' }}>- {Math.round(traditionalFixedCost).toLocaleString()}</span>
@@ -104,29 +104,29 @@ const ROICalculator = () => {
                             <span style={{ color: '#dc2626', fontWeight: 'bold' }}>- {Math.round(traditionalVariableCost).toLocaleString()}</span>
                         </div>
                     </div>
-                    <div style={{ borderTop: '2px solid #ef4444', paddingTop: '15px' }}>
+                    <div style={{ borderTop: '2px solid #1e40af', paddingTop: '15px' }}>
                         <div style={{ color: '#64748b', fontSize: '0.9rem' }}>每月淨利潤</div>
-                        <div style={{ fontSize: '2rem', fontWeight: '800', color: traditionalProfit >= 0 ? '#10b981' : '#ef4444' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: '800', color: traditionalProfit >= 0 ? '#d4af37' : '#dc2626' }}>
                             NT$ {Math.round(traditionalProfit).toLocaleString()}
                         </div>
                     </div>
                     {clientsPerEmployee < 30 && (
-                        <div style={{ marginTop: '15px', padding: '10px', background: '#fee2e2', borderRadius: '8px', fontSize: '0.85rem', color: '#991b1b' }}>
+                        <div style={{ marginTop: '15px', padding: '10px', background: '#dbeafe', borderRadius: '8px', fontSize: '0.85rem', color: '#1e3a8a' }}>
                             <i className="fa-solid fa-triangle-exclamation"></i> 人力閒置，成本增加 {((idleCostFactor - 1) * 100).toFixed(0)}%
                         </div>
                     )}
                 </div>
 
                 {/* Smart Mode Card */}
-                <div style={{ background: '#f0fdf4', padding: '30px', borderRadius: '15px', border: '3px solid #10b981' }}>
-                    <h3 style={{ color: '#10b981', marginBottom: '25px', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: '#fefce8', padding: '30px', borderRadius: '15px', border: '3px solid #d4af37' }}>
+                    <h3 style={{ color: '#d4af37', marginBottom: '25px', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <i className="fa-solid fa-robot"></i> SmartTAXer 智能模式
                     </h3>
                     <div style={{ marginBottom: '15px' }}>
                         <div style={{ color: '#64748b', fontSize: '0.9rem' }}>每月總收入</div>
                         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0f172a' }}>NT$ {revenue.toLocaleString()}</div>
                     </div>
-                    <div style={{ borderTop: '1px solid #bbf7d0', paddingTop: '15px', marginBottom: '15px' }}>
+                    <div style={{ borderTop: '1px solid #fef08a', paddingTop: '15px', marginBottom: '15px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                             <span style={{ color: '#64748b' }}>固定成本</span>
                             <span style={{ color: '#dc2626', fontWeight: 'bold' }}>- {Math.round(smartFixedCost).toLocaleString()}</span>
@@ -136,20 +136,20 @@ const ROICalculator = () => {
                             <span style={{ color: '#dc2626', fontWeight: 'bold' }}>- {Math.round(smartVariableCost).toLocaleString()}</span>
                         </div>
                     </div>
-                    <div style={{ borderTop: '2px solid #10b981', paddingTop: '15px' }}>
+                    <div style={{ borderTop: '2px solid #d4af37', paddingTop: '15px' }}>
                         <div style={{ color: '#64748b', fontSize: '0.9rem' }}>每月淨利潤</div>
-                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#10b981' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#d4af37' }}>
                             NT$ {Math.round(smartProfit).toLocaleString()}
                         </div>
                     </div>
-                    <div style={{ marginTop: '15px', padding: '10px', background: '#dcfce7', borderRadius: '8px', fontSize: '0.85rem', color: '#166534' }}>
+                    <div style={{ marginTop: '15px', padding: '10px', background: '#fef9c3', borderRadius: '8px', fontSize: '0.85rem', color: '#713f12' }}>
                         <i className="fa-solid fa-check-circle"></i> 固定人力，效率倍增
                     </div>
                 </div>
             </div>
 
             {/* Profit Comparison */}
-            <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '40px', borderRadius: '15px', textAlign: 'center', marginBottom: '60px', color: '#fff' }}>
+            <div style={{ background: 'linear-gradient(135deg, #1e40af 0%, #d4af37 100%)', padding: '40px', borderRadius: '15px', textAlign: 'center', marginBottom: '60px', color: '#fff' }}>
                 <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', opacity: 0.9 }}>導入 SmartTAXer 後</h3>
                 <div style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '10px' }}>
                     {profitDiff >= 0 ? '+' : ''} NT$ {Math.round(profitDiff).toLocaleString()}
@@ -183,7 +183,7 @@ const ROICalculator = () => {
                 </div>
                 <div style={{ textAlign: 'center', fontSize: '1.1rem' }}>
                     <span style={{ color: '#64748b' }}>節省工時：</span>
-                    <span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '10px' }}>
+                    <span style={{ color: '#d4af37', fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '10px' }}>
                         {Math.round(hoursSaved).toLocaleString()} hrs ({((hoursSaved / traditionalHours) * 100).toFixed(0)}%)
                     </span>
                 </div>
