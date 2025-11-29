@@ -452,18 +452,27 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Keep container centered but content will be aligned */
     position: relative;
     padding: 20px 0;
+    max-width: 400px;
+    /* Limit width for better readability */
+    margin: 0 auto;
+    /* Center the timeline in the card */
 }
 
 .timeline-step {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    /* Change to row */
+    align-items: flex-start;
+    /* Align top */
     position: relative;
     z-index: 1;
     margin-bottom: 40px;
     width: 100%;
+    text-align: left;
+    /* Align text left */
 }
 
 .timeline-step:last-child {
@@ -472,11 +481,14 @@ footer {
 
 .timeline-line {
     position: absolute;
-    top: 60px;
+    top: 80px;
+    /* Start below the icon */
     bottom: -40px;
+    /* Extend to next icon */
     width: 4px;
     background-color: #e2e8f0;
-    left: 50%;
+    left: 40px;
+    /* Center of the 80px icon */
     transform: translateX(-50%);
     z-index: 0;
 }
@@ -494,15 +506,23 @@ footer {
     justify-content: center;
     background-color: #fff;
     border: 4px solid;
-    margin-bottom: 15px;
+    margin-right: 20px;
+    /* Add space between icon and text */
+    margin-bottom: 0;
+    /* Remove bottom margin */
     position: relative;
     z-index: 2;
     font-size: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    /* Prevent icon from shrinking */
 }
 
 .timeline-text {
-    text-align: center;
+    text-align: left;
+    /* Align text left */
+    padding-top: 10px;
+    /* Align with icon center visually */
 }
 
 .timeline-title {
