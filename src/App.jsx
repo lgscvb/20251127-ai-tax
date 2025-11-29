@@ -143,7 +143,7 @@ function App() {
             </div>
           </div>
 
-          {/* Death Spiral Section (Moved out of grid) */}
+          {/* Death Spiral Section (Icon-based) */}
           <div style={{ marginTop: '80px', textAlign: 'center' }}>
             <h2 className="text-primary" style={{ marginBottom: '40px' }}>打破事務所的「死亡螺旋」</h2>
             <p style={{ marginBottom: '60px' }}>為什麼人訓練好了就跑？因為忙季壓力太大。<br />SmartTAXer 讓您的員工<strong>產能倍增</strong>，但<strong>工作壓力只剩 1/3</strong>。</p>
@@ -162,10 +162,55 @@ function App() {
                 <h3 className="text-danger" style={{ fontSize: '1.8rem', marginBottom: '20px' }}>
                   <i className="fa-solid fa-skull-crossbones"></i> 傳統模式：死亡螺旋
                 </h3>
-                <div style={{ height: '250px', overflow: 'hidden', borderRadius: '10px', marginBottom: '30px' }}>
-                  <img src="images/old_workflow.png" alt="Chaotic Office"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+
+                {/* Icon Visual Flow - Chaos */}
+                <div style={{ height: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', marginBottom: '30px', background: '#fef2f2', borderRadius: '10px', padding: '20px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <i className="fa-solid fa-file-invoice" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
+                    <i className="fa-solid fa-file-invoice" style={{ fontSize: '2.5rem', color: '#f87171', marginLeft: '20px' }}></i>
+                    <i className="fa-solid fa-file-invoice" style={{ fontSize: '2rem', color: '#fca5a5', marginLeft: '40px' }}></i>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                    <i className="fa-solid fa-phone-volume" style={{ fontSize: '2.5rem', color: '#dc2626' }}></i>
+                    <i className="fa-solid fa-laptop-code" style={{ fontSize: '2.5rem', color: '#b91c1c' }}></i>
+                    <i className="fa-solid fa-users-gear" style={{ fontSize: '2rem', color: '#991b1b' }}></i>
+                  </div>
                 </div>
+
+                {/* Method 1: Large Icon */}
+                <div style={{ margin: '30px 0' }}>
+                  <i className="fa-solid fa-rotate" style={{ fontSize: '4rem', color: '#ef4444' }}></i>
+                  <p style={{ marginTop: '10px', fontWeight: 'bold', color: '#ef4444' }}>惡性循環</p>
+                </div>
+
+                {/* Method 2: Flow Chart */}
+                <div style={{ background: '#fee2e2', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', fontSize: '0.9rem' }}>
+                    <div><i className="fa-solid fa-face-tired" style={{ fontSize: '2rem', color: '#dc2626' }}></i><div>壓力大</div></div>
+                    <i className="fa-solid fa-arrow-right" style={{ color: '#ef4444' }}></i>
+                    <div><i className="fa-solid fa-person-walking-arrow-right" style={{ fontSize: '2rem', color: '#dc2626' }}></i><div>離職</div></div>
+                    <i className="fa-solid fa-arrow-right" style={{ color: '#ef4444' }}></i>
+                    <div><i className="fa-solid fa-user-plus" style={{ fontSize: '2rem', color: '#dc2626' }}></i><div>招新人</div></div>
+                    <i className="fa-solid fa-arrow-right" style={{ color: '#ef4444' }}></i>
+                    <div><i className="fa-solid fa-rotate-left" style={{ fontSize: '2rem', color: '#ef4444' }}></i><div>循環</div></div>
+                  </div>
+                </div>
+
+                {/* Method 3: Numbers */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '20px' }}>
+                  <div style={{ background: '#fee2e2', padding: '15px', borderRadius: '8px' }}>
+                    <i className="fa-solid fa-triangle-exclamation" style={{ fontSize: '1.5rem', color: '#dc2626' }}></i>
+                    <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#ef4444' }}>200%</div>
+                    <div style={{ fontSize: '0.9rem', color: '#991b1b' }}>工作量</div>
+                  </div>
+                  <div style={{ background: '#fee2e2', padding: '15px', borderRadius: '8px' }}>
+                    <i className="fa-solid fa-heart-crack" style={{ fontSize: '1.5rem', color: '#dc2626' }}></i>
+                    <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#ef4444' }}>50%</div>
+                    <div style={{ fontSize: '0.9rem', color: '#991b1b' }}>離職率</div>
+                  </div>
+                </div>
+
+                {/* Text List */}
                 <div style={{ fontSize: '1.1rem', color: '#64748b', textAlign: 'left', paddingLeft: '20px' }}>
                   <p style={{ marginBottom: '15px' }}><i className="fa-solid fa-circle-xmark text-danger" style={{ marginRight: '10px' }}></i> 忙季加班地獄 (壓力大)</p>
                   <p style={{ marginBottom: '15px' }}><i className="fa-solid fa-circle-xmark text-danger" style={{ marginRight: '10px' }}></i> 員工身心俱疲 (想離職)</p>
@@ -187,10 +232,59 @@ function App() {
                 <h3 className="text-success" style={{ fontSize: '1.8rem', marginBottom: '20px' }}>
                   <i className="fa-solid fa-seedling"></i> 智能模式：正向循環
                 </h3>
-                <div style={{ height: '250px', overflow: 'hidden', borderRadius: '10px', marginBottom: '30px' }}>
-                  <img src="images/new_workflow.png" alt="Zen Office"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+
+                {/* Icon Visual Flow - Chaos → AI → Report */}
+                <div style={{ height: '250px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '30px', background: '#f0fdf4', borderRadius: '10px', padding: '20px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '2rem', color: '#94a3b8' }}>
+                    <i className="fa-solid fa-file-invoice"></i>
+                    <i className="fa-solid fa-receipt"></i>
+                  </div>
+                  <i className="fa-solid fa-arrow-right" style={{ fontSize: '2rem', color: '#d4af37' }}></i>
+                  <div style={{ fontSize: '4rem', color: '#10b981' }}>
+                    <i className="fa-solid fa-robot"></i>
+                  </div>
+                  <i className="fa-solid fa-arrow-right" style={{ fontSize: '2rem', color: '#d4af37' }}></i>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                    <i className="fa-solid fa-table" style={{ fontSize: '2.5rem', color: '#10b981', gridColumn: '1 / 3' }}></i>
+                    <i className="fa-solid fa-chart-pie" style={{ fontSize: '2rem', color: '#059669' }}></i>
+                    <i className="fa-solid fa-chart-line" style={{ fontSize: '2rem', color: '#047857' }}></i>
+                  </div>
                 </div>
+
+                {/* Method 1: Large Icon */}
+                <div style={{ margin: '30px 0' }}>
+                  <i className="fa-solid fa-arrow-trend-up" style={{ fontSize: '4rem', color: '#10b981' }}></i>
+                  <p style={{ marginTop: '10px', fontWeight: 'bold', color: '#10b981' }}>正向成長</p>
+                </div>
+
+                {/* Method 2: Flow Chart */}
+                <div style={{ background: '#dcfce7', padding: '20px', borderRadius: '10px', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', fontSize: '0.9rem' }}>
+                    <div><i className="fa-solid fa-face-smile" style={{ fontSize: '2rem', color: '#059669' }}></i><div>輕鬆</div></div>
+                    <i className="fa-solid fa-arrow-right" style={{ color: '#10b981' }}></i>
+                    <div><i className="fa-solid fa-trophy" style={{ fontSize: '2rem', color: '#059669' }}></i><div>成就</div></div>
+                    <i className="fa-solid fa-arrow-right" style={{ color: '#10b981' }}></i>
+                    <div><i className="fa-solid fa-user-check" style={{ fontSize: '2rem', color: '#059669' }}></i><div>留任</div></div>
+                    <i className="fa-solid fa-arrow-right" style={{ color: '#10b981' }}></i>
+                    <div><i className="fa-solid fa-chart-line" style={{ fontSize: '2rem', color: '#10b981' }}></i><div>成長</div></div>
+                  </div>
+                </div>
+
+                {/* Method 3: Numbers */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '20px' }}>
+                  <div style={{ background: '#dcfce7', padding: '15px', borderRadius: '8px' }}>
+                    <i className="fa-solid fa-circle-check" style={{ fontSize: '1.5rem', color: '#059669' }}></i>
+                    <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#10b981' }}>33%</div>
+                    <div style={{ fontSize: '0.9rem', color: '#065f46' }}>壓力</div>
+                  </div>
+                  <div style={{ background: '#dcfce7', padding: '15px', borderRadius: '8px' }}>
+                    <i className="fa-solid fa-heart" style={{ fontSize: '1.5rem', color: '#059669' }}></i>
+                    <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#10b981' }}>95%</div>
+                    <div style={{ fontSize: '0.9rem', color: '#065f46' }}>留任率</div>
+                  </div>
+                </div>
+
+                {/* Text List */}
                 <div style={{ fontSize: '1.1rem', color: '#64748b', textAlign: 'left', paddingLeft: '20px' }}>
                   <p style={{ marginBottom: '15px' }}><i className="fa-solid fa-circle-check text-success" style={{ marginRight: '10px' }}></i> <strong>忙季準時下班</strong> (壓力 1/3)</p>
                   <p style={{ marginBottom: '15px' }}><i className="fa-solid fa-circle-check text-success" style={{ marginRight: '10px' }}></i> 專注高價值工作 (成就感)</p>
