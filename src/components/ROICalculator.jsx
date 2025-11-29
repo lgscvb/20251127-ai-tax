@@ -8,7 +8,7 @@ const ROICalculator = () => {
     // Parameters
     const feePerClient = 1800;
     const salaryPerEmployee = 45000;
-    const fixedCost = 150000;
+    const fixedCost = 80000;
     const variableCostRatio = 0.2;
 
     // Calculate based on current inputs
@@ -30,7 +30,7 @@ const ROICalculator = () => {
     const traditionalFixedCost = (requiredEmployees * salaryPerEmployee + fixedCost) * idleCostFactor;
     const traditionalVariableCost = revenue * variableCostRatio;
     const traditionalProfit = revenue - traditionalFixedCost - traditionalVariableCost;
-    const traditionalHours = totalClients * 4;
+    const traditionalHours = totalClients * 3.2;
 
     // Work hours comparison data
     const workHoursData = [
@@ -188,8 +188,49 @@ const ROICalculator = () => {
                     </span>
                 </div>
                 <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#94a3b8', marginTop: '20px' }}>
-                    *傳統模式：每戶 4 小時 | 智能模式：每戶 0.5 小時（AI 輔助）
+                    *傳統模式：每戶 3.2 小時 | 智能模式：每戶 0.5 小時（AI 輔助）
                 </p>
+            </div>
+
+            {/* Formula Explanation */}
+            <div style={{ marginTop: '60px', padding: '30px', background: '#f8fafc', borderRadius: '15px', border: '1px solid #e2e8f0' }}>
+                <h3 style={{ color: '#0f172a', marginBottom: '20px', fontSize: '1.3rem' }}>
+                    <i className="fa-solid fa-calculator"></i> 計算公式說明
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+                    <div>
+                        <h4 style={{ color: '#10b981', marginBottom: '15px' }}>SmartTAXer 智能模式</h4>
+                        <div style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#334155' }}>
+                            <div><strong>總收入</strong> = 總客戶數 × $1,800</div>
+                            <div><strong>固定成本</strong> = (員工數 × $45,000) + $80,000</div>
+                            <div style={{ marginLeft: '20px', fontSize: '0.85rem', color: '#64748b' }}>含所長薪資、房租、水電、雜支</div>
+                            <div><strong>變動成本</strong> = 總收入 × 20%</div>
+                            <div><strong>淨利潤</strong> = 總收入 - 固定成本 - 變動成本</div>
+                            <div style={{ marginTop: '10px' }}><strong>作業工時</strong> = 總客戶數 × 0.5 hrs</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style={{ color: '#ef4444', marginBottom: '15px' }}>傳統模式</h4>
+                        <div style={{ fontSize: '0.9rem', lineHeight: '1.8', color: '#334155' }}>
+                            <div><strong>總收入</strong> = 總客戶數 × $1,800</div>
+                            <div><strong>需求員工數</strong> = 員工數 × (人均客戶數 ÷ 50)</div>
+                            <div style={{ marginLeft: '20px', fontSize: '0.85rem', color: '#64748b' }}>傳統模式上限 50 家/人</div>
+                            <div><strong>固定成本</strong> = (需求員工數 × $45,000 + $80,000) × 閒置係數</div>
+                            <div style={{ marginLeft: '20px', fontSize: '0.85rem', color: '#64748b' }}>閒置係數：人均客戶數 &lt; 30 時，成本增加最高 50%</div>
+                            <div><strong>變動成本</strong> = 總收入 × 20%</div>
+                            <div><strong>淨利潤</strong> = 總收入 - 固定成本 - 變動成本</div>
+                            <div style={{ marginTop: '10px' }}><strong>作業工時</strong> = 總客戶數 × 3.2 hrs</div>
+                        </div>
+                    </div>
+                </div>
+                <div style={{ marginTop: '25px', padding: '15px', background: '#fffbeb', borderRadius: '8px', borderLeft: '4px solid #f59e0b' }}>
+                    <div style={{ fontSize: '0.9rem', color: '#92400e', fontWeight: 'bold', marginBottom: '8px' }}>
+                        <i className="fa-solid fa-lightbulb"></i> 預設模擬參數
+                    </div>
+                    <div style={{ fontSize: '0.85rem', color: '#78350f', lineHeight: '1.6' }}>
+                        每戶服務費：$1,800/月 | 員工月薪：$45,000 | 固定成本：$80,000/月 | 變動成本率：20%
+                    </div>
+                </div>
             </div>
         </div>
     );
