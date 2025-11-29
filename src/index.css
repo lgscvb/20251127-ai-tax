@@ -414,6 +414,11 @@ img {
     color: var(--accent);
     margin-right: 15px;
     margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.feature-list li strong {
+    white-space: nowrap;
 }
 
 .feature-image img {
