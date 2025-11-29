@@ -15,8 +15,11 @@ const ROICalculator = () => {
     const totalClients = employees * clientsPerEmployee;
     const revenue = totalClients * feePerClient;
 
-    // Smart Mode
-    const smartFixedCost = employees * salaryPerEmployee + fixedCost;
+    // SmartTAXer Mode
+    // Capacity: 150 clients per employee
+    // Cost is based on REQUIRED employees, assuming excess staff can be reassigned or cost saved
+    const smartEmployees = Math.ceil(totalClients / 150);
+    const smartFixedCost = smartEmployees * salaryPerEmployee + fixedCost;
     const smartVariableCost = revenue * variableCostRatio;
     const smartProfit = revenue - smartFixedCost - smartVariableCost;
     const smartHours = totalClients * 0.5;
